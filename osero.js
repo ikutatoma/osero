@@ -49,7 +49,8 @@ function readUserInput(question) {
       return true;
 
     }
-    sarchTop(row, column) {
+
+    sarchTopVertical(row, column) {
       var count = 0;
       var bre = 0;
       var emp = 0;
@@ -71,42 +72,10 @@ function readUserInput(question) {
       return memo;
     }
     sarchTopRight(row, column) {
-
-    }
-    sarchHorizontal(row, column) {
-
-    }
-    sarchBottom(row, column) {
-
-    }
-
-    setPiece(row, column) {
-      let count = 0;
-      let bre = 0;
-      let emp = 0;
-      //上シリーズ
-      for (var i = row - 1; i >= 0; i--) { //上
-        if (this.judge(i, column) == false) {
-          bre = -1;
-          break;
-        } else if (this.judge(i, column) == -1) {
-          emp = -1;
-          break;
-        } else {
-          count++;
-        }
-      }
-
-      if (bre != 0 && emp != -1 && count != 0) {
-        for (var i = count,r = row; i >= 0; i--) {
-          var pieceColor = (turn % 2 == 0) ? "○" : "●"
-          this.stage[r--][column] = pieceColor;
-        }
-      }
-
-      count = 0;
-      bre = 0;
-      emp = 0;
+      var count = 0;
+      var bre = 0;
+      var emp = 0;
+      var memo = new Array();
       for (var i = row - 1, j = column - 1; i >= 0 && j >= 0; i--, j--) { //右上
         if (this.judge(i, j) == false) {
           bre = -1;
@@ -118,16 +87,17 @@ function readUserInput(question) {
           count++;
         }
       }
-      if (bre != 0 && emp != -1 && count != 0) {
-        for (var i = count,r = row,c = column; i >= 0; i--) {
-          var pieceColor = (turn % 2 == 0) ? "○" : "●"
-          this.stage[r--][c--] = pieceColor;
-        }
-      }
+      memo[0] = count;
+      memo[1] = bre;
+      memo[2] = emp;
+      return memo;
+    }
+    sarchTopLeft(row, column) {
 
-      count = 0;
-      bre = 0;
-      emp = 0;
+      var count = 0;
+      var bre = 0;
+      var emp = 0;
+      var memo = new Array();
       for (var i = row - 1, j = column + 1; i >= 0 && j >= 0; i--, j++) { //左上
         if (this.judge(i, j) == false) {
           bre = -1;
@@ -139,17 +109,17 @@ function readUserInput(question) {
           count++;
         }
       }
-      if (bre != 0 && emp != -1 && count != 0) {
-        for (var i = count,r = row,c = column; i >= 0; i--) {
-          var pieceColor = (turn % 2 == 0) ? "○" : "●"
-          this.stage[r--][c++] = pieceColor;
-        }
-      }
+      memo[0] = count;
+      memo[1] = bre;
+      memo[2] = emp;
+      return memo;
 
-      //横シリーズ
-      count = 0;
-      bre = 0;
-      emp = 0;
+    }
+    sarchHorizontalRight(row, column) {
+      var count = 0;
+      var bre = 0;
+      var emp = 0;
+      var memo = new Array();
       for (var j = column - 1; j >= 0; j--) { //右
         if (this.judge(row, j) == false) {
           bre = -1;
@@ -161,16 +131,16 @@ function readUserInput(question) {
           count++;
         }
       }
-      if (bre != 0 && emp != -1 && count != 0) {
-        for (var i = count,c = column; i >= 0; i--) {
-          var pieceColor = (turn % 2 == 0) ? "○" : "●"
-          this.stage[row][c--] = pieceColor;
-        }
-      }
-
-      count = 0;
-      bre = 0;
-      emp = 0;
+      memo[0] = count;
+      memo[1] = bre;
+      memo[2] = emp;
+      return memo;
+    }
+    sarchHorizontalLeft(row, column) {
+      var count = 0;
+      var bre = 0;
+      var emp = 0;
+      var memo = new Array();
       for (var j = column + 1; j <= 7; j++) { //左
         if (this.judge(row, j) == false) {
           bre = -1;
@@ -182,17 +152,17 @@ function readUserInput(question) {
           count++;
         }
       }
-      if (bre != 0 && emp != -1 && count != 0) {
-        for (var i = count,c = column; i >= 0; i--) {
-          var pieceColor = (turn % 2 == 0) ? "○" : "●"
-          this.stage[row][c++] = pieceColor;
-        }
-      }
-      //下シリーズ
-      count = 0;
-      bre = 0;
-      emp = 0;
-      for (var i = row + 1; i <= 7; i++) { //下
+      memo[0] = count;
+      memo[1] = bre;
+      memo[2] = emp;
+      return memo;
+    }
+    sarchBottomVertical(row, column) {
+      var count = 0;
+      var bre = 0;
+      var emp = 0;
+      var memo = new Array();
+      for (var i = row + 1; i <= 7; i++) {
         if (this.judge(i, column) == false) {
           bre = -1;
           break;
@@ -203,16 +173,16 @@ function readUserInput(question) {
           count++;
         }
       }
-      if (bre != 0 && emp != -1 && count != 0) {
-        for (var i = count,r = row; i >= 0; i--) {
-          var pieceColor = (turn % 2 == 0) ? "○" : "●"
-          this.stage[r++][column] = pieceColor;
-        }
-      }
-
-      count = 0;
-      bre = 0;
-      emp = 0;
+      memo[0] = count;
+      memo[1] = bre;
+      memo[2] = emp;
+      return memo;
+    }
+    sarchBottomRight(row,column) {
+      var count = 0;
+      var bre = 0;
+      var emp = 0;
+      var memo = new Array();
       for (var i = row + 1, j = column - 1; i <= 7 && j >= 0; i++, j--) { //右下
         if (this.judge(i, j) == false) {
           bre = -1;
@@ -224,16 +194,16 @@ function readUserInput(question) {
           count++;
         }
       }
-      if (bre != 0 && emp != -1 && count != 0) {
-        for (var i = count,r = row,c = column; i >= 0; i--) {
-          var pieceColor = (turn % 2 == 0) ? "○" : "●"
-          this.stage[r++][c--] = pieceColor;
-        }
-      }
-
-      count = 0;
-      bre = 0;
-      emp = 0;
+      memo[0] = count;
+      memo[1] = bre;
+      memo[2] = emp;
+      return memo;
+    }
+    sarchBottomLeft(row, column) {
+      var count = 0;
+      var bre = 0;
+      var emp = 0;
+      var memo = new Array();
       for (var i = row + 1, j = column + 1; i <= 7 && j <= 7; i++, j++) { //左下
         if (this.judge(i, j) == false) {
           bre = -1;
@@ -245,12 +215,79 @@ function readUserInput(question) {
           count++;
         }
       }
-      if (bre != 0 && emp != -1 && count != 0) {
-        for (var i = count,r = row,c = column; i >= 0; i--) {
+      memo[0] = count;
+      memo[1] = bre;
+      memo[2] = emp;
+      return memo;
+    }
+
+    setPiece(row, column) {
+
+      var memo = this.sarchTopVertical(row, column);
+      if (memo[0] != 0 && memo[1] != 0 && memo[2] != -1) {
+        for (var i = memo[0], r = row; i >= 0; i--) {
+          var pieceColor = (turn % 2 == 0) ? "○" : "●"
+          this.stage[r--][column] = pieceColor;
+        }
+      }
+
+      var memo = this.sarchTopRight(row, column);
+      if (memo[0] != 0 && memo[1] != 0 && memo[2] != -1) {
+        for (var i = memo[0], r = row, c = column; i >= 0; i--) {
+          var pieceColor = (turn % 2 == 0) ? "○" : "●"
+          this.stage[r--][c--] = pieceColor;
+        }
+      }
+
+      var memo = this.sarchTopLeft(row, column);
+      if (memo[0] != 0 && memo[1] != 0 && memo[2] != -1) {
+        for (var i = memo[0], r = row, c = column; i >= 0; i--) {
+          var pieceColor = (turn % 2 == 0) ? "○" : "●"
+          this.stage[r--][c++] = pieceColor;
+        }
+      }
+
+      //横シリーズ
+      var memo = this.sarchHorizontalRight(row, column);
+      if (memo[0] != 0 && memo[1] != 0 && memo[2] != -1) {
+        for (var i = memo[0], c = column; i >= 0; i--) {
+          var pieceColor = (turn % 2 == 0) ? "○" : "●"
+          this.stage[row][c--] = pieceColor;
+        }
+      }
+
+      var memo = this.sarchHorizontalLeft(row, column);
+      if (memo[0] != 0 && memo[1] != 0 && memo[2] != -1) {
+        for (var i = memo[0], c = column; i >= 0; i--) {
+          var pieceColor = (turn % 2 == 0) ? "○" : "●"
+          this.stage[row][c++] = pieceColor;
+        }
+      }
+      //下シリーズ
+      var memo = this.sarchBottomVertical(row, column);
+      if (memo[0] != 0 && memo[1] != 0 && memo[2] != -1) {
+        for (var i = memo[0], r = row; i >= 0; i--) {
+          var pieceColor = (turn % 2 == 0) ? "○" : "●"
+          this.stage[r++][column] = pieceColor;
+        }
+      }
+
+      var memo =this.sarchBottomRight(row, column);
+      if (memo[0] != 0 && memo[1] != 0 && memo[2] != -1) {
+        for (var i = memo[0], r = row, c = column; i >= 0; i--) {
+          var pieceColor = (turn % 2 == 0) ? "○" : "●"
+          this.stage[r++][c--] = pieceColor;
+        }
+      }
+
+      var memo = this.sarchBottomLeft(row, column);
+      if (memo[0] != 0 && memo[1] != 0 && memo[2] != -1) {
+        for (var i = memo[0], r = row, c = column; i >= 0; i--) {
           var pieceColor = (turn % 2 == 0) ? "○" : "●"
           this.stage[r++][c++] = pieceColor;
         }
       }
+
       if (this.stage[row][column] == " ") {
         return true;
       }
