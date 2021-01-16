@@ -40,8 +40,6 @@ function readUserInput(question) {
       }
     }
     judge(row, column) {
-      console.log(`[${row}][${column}]`);
-
       var turnColor = (turn % 2 == 0) ? "○" : "●";
       if (this.stage[row][column] == turnColor) { //同じ色
         return false;
@@ -52,20 +50,7 @@ function readUserInput(question) {
       return true;
 
     }
-    cJ(count, bre, emp) {
-      if (bre != 0 && emp != -1 && count != 0) {
-        console.log("全部ok")
-        console.log("||||||||||||||||||")
-        console.log("------------------")
-        return false;
-      } else {
-        console.log((count != 0) ? "countはyes" : count);
-        console.log((bre != 0) ? "breはyes" : bre);
-        console.log((emp != 1) ? "empはyes" : emp);
-        console.log("-----------------")
-        return true;
-      }
-    }
+
     checkPosition(row, column) {
       let count = 0;
       let bre = 0;
@@ -82,15 +67,14 @@ function readUserInput(question) {
           count++;
         }
       }
+
       if (bre != 0 && emp != -1 && count != 0) {
-        console.log("上は" + count);
-        for (var i = count; i >= 0; i--) {
+        for (var i = count,r = row; i >= 0; i--) {
           var pieceColor = (turn % 2 == 0) ? "○" : "●"
-          this.stage[row][column] = pieceColor;
-          row--;
+          this.stage[r--][column] = pieceColor;
         }
       }
-      this.cJ(count, bre, emp);
+
 
       count = 0;
       bre = 0;
@@ -107,15 +91,12 @@ function readUserInput(question) {
         }
       }
       if (bre != 0 && emp != -1 && count != 0) {
-        console.log("右上は" + count);
-        for (var i = count; i >= 0; i--) {
+        for (var i = count,r = row,c = column; i >= 0; i--) {
           var pieceColor = (turn % 2 == 0) ? "○" : "●"
-          this.stage[row][column] = pieceColor;
-          row--;
-          column--;
+          this.stage[r--][c--] = pieceColor;
         }
       }
-      this.cJ(count, bre, emp);
+
 
       count = 0;
       bre = 0;
@@ -132,16 +113,12 @@ function readUserInput(question) {
         }
       }
       if (bre != 0 && emp != -1 && count != 0) {
-        console.log("左上は" + count);
-        for (var i = count; i >= 0; i--) {
+        for (var i = count,r = row,c = column; i >= 0; i--) {
           var pieceColor = (turn % 2 == 0) ? "○" : "●"
-          this.stage[row][column] = pieceColor;
-
-          row--;
-          column++;
+          this.stage[r--][c++] = pieceColor;
         }
       }
-      this.cJ(count, bre, emp);
+
 
       //横シリーズ
       count = 0;
@@ -159,14 +136,12 @@ function readUserInput(question) {
         }
       }
       if (bre != 0 && emp != -1 && count != 0) {
-        console.log("右は" + count);
-        for (var i = count; i >= 0; i--) {
+        for (var i = count,c = column; i >= 0; i--) {
           var pieceColor = (turn % 2 == 0) ? "○" : "●"
-          this.stage[row][column] = pieceColor;
-          column--;
+          this.stage[row][c--] = pieceColor;
         }
       }
-      this.cJ(count, bre, emp);
+
 
       count = 0;
       bre = 0;
@@ -183,14 +158,12 @@ function readUserInput(question) {
         }
       }
       if (bre != 0 && emp != -1 && count != 0) {
-        console.log("左は" + count);
-        for (var i = count; i >= 0; i--) {
+        for (var i = count,c = column; i >= 0; i--) {
           var pieceColor = (turn % 2 == 0) ? "○" : "●"
-          this.stage[row][column] = pieceColor;
-          column++;
+          this.stage[row][c++] = pieceColor;
         }
       }
-      this.cJ(count, bre, emp);
+
 
       //下シリーズ
       count = 0;
@@ -208,14 +181,12 @@ function readUserInput(question) {
         }
       }
       if (bre != 0 && emp != -1 && count != 0) {
-        console.log("下は" + count);
-        for (var i = count; i >= 0; i--) {
+        for (var i = count,r = row; i >= 0; i--) {
           var pieceColor = (turn % 2 == 0) ? "○" : "●"
-          this.stage[row][column] = pieceColor;
-          row++;
+          this.stage[r++][column] = pieceColor;
         }
       }
-      this.cJ(count, bre, emp);
+
 
       count = 0;
       bre = 0;
@@ -232,15 +203,12 @@ function readUserInput(question) {
         }
       }
       if (bre != 0 && emp != -1 && count != 0) {
-        console.log("右下は" + count);
-        for (var i = count; i >= 0; i--) {
+        for (var i = count,r = row,c = column; i >= 0; i--) {
           var pieceColor = (turn % 2 == 0) ? "○" : "●"
-          this.stage[row][column] = pieceColor;
-          row++;
-          column--;
+          this.stage[r++][c--] = pieceColor;
         }
       }
-      this.cJ(count, bre, emp);
+
 
       count = 0;
       bre = 0;
@@ -257,16 +225,11 @@ function readUserInput(question) {
         }
       }
       if (bre != 0 && emp != -1 && count != 0) {
-        console.log("左下は" + count);
-        for (var i = count; i >= 0; i--) {
+        for (var i = count,r = row,c = column; i >= 0; i--) {
           var pieceColor = (turn % 2 == 0) ? "○" : "●"
-          this.stage[row][column] = pieceColor;
-          row++;
-          column++;
+          this.stage[r++][c++] = pieceColor;
         }
       }
-      this.cJ(count, bre, emp);
-
       if (this.stage[row][column] == " ") {
         return true;
       }
