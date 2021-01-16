@@ -21,7 +21,6 @@ function readUserInput(question) {
       return this.name;
     }
   }
-
   class osero {
     constructor(stage) {
       this.stage = stage;
@@ -50,7 +49,6 @@ function readUserInput(question) {
       return true;
 
     }
-
     checkPosition(row, column) {
       let count = 0;
       let bre = 0;
@@ -75,7 +73,6 @@ function readUserInput(question) {
         }
       }
 
-
       count = 0;
       bre = 0;
       emp = 0;
@@ -97,7 +94,6 @@ function readUserInput(question) {
         }
       }
 
-
       count = 0;
       bre = 0;
       emp = 0;
@@ -118,7 +114,6 @@ function readUserInput(question) {
           this.stage[r--][c++] = pieceColor;
         }
       }
-
 
       //横シリーズ
       count = 0;
@@ -142,7 +137,6 @@ function readUserInput(question) {
         }
       }
 
-
       count = 0;
       bre = 0;
       emp = 0;
@@ -163,8 +157,6 @@ function readUserInput(question) {
           this.stage[row][c++] = pieceColor;
         }
       }
-
-
       //下シリーズ
       count = 0;
       bre = 0;
@@ -187,7 +179,6 @@ function readUserInput(question) {
         }
       }
 
-
       count = 0;
       bre = 0;
       emp = 0;
@@ -208,7 +199,6 @@ function readUserInput(question) {
           this.stage[r++][c--] = pieceColor;
         }
       }
-
 
       count = 0;
       bre = 0;
@@ -257,8 +247,7 @@ function readUserInput(question) {
       }
     }
   }
-
-  var stage = new osero([
+  const stage = new osero([
     [
       " ",
       " ",
@@ -340,11 +329,10 @@ function readUserInput(question) {
       " ",
     ]
   ]);
-
-  const blackPlayer = new player(await readUserInput("1人目のPlayerの名前を入力してください。")); //黒のPlayer
-  const whitePlayer = new player(await readUserInput("2人目のPlayerの名前を入力してください。")); //白のPlayer
-  turn = 0;
-  while (turn < 60) {
+  const blackPlayer = new player(await readUserInput("1人目のPlayerの名前を入力してください。"));
+  const whitePlayer = new player(await readUserInput("2人目のPlayerの名前を入力してください。"));
+  let turn = 0;
+  while (true) {
     await stage.changePiece();
     turn++;
   }
