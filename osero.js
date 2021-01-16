@@ -49,7 +49,38 @@ function readUserInput(question) {
       return true;
 
     }
-    checkPosition(row, column) {
+    sarchTop(row, column) {
+      var count = 0;
+      var bre = 0;
+      var emp = 0;
+      var memo = new Array();
+      for (var i = row - 1; i >= 0; i--) { //上
+        if (this.judge(i, column) == false) {
+          bre = -1;
+          break;
+        } else if (this.judge(i, column) == -1) {
+          emp = -1;
+          break;
+        } else {
+          count++;
+        }
+      }
+      memo[0] = count;
+      memo[1] = bre;
+      memo[2] = emp;
+      return memo;
+    }
+    sarchTopRight(row, column) {
+
+    }
+    sarchHorizontal(row, column) {
+
+    }
+    sarchBottom(row, column) {
+
+    }
+
+    setPiece(row, column) {
       let count = 0;
       let bre = 0;
       let emp = 0;
@@ -241,7 +272,7 @@ function readUserInput(question) {
           console.log("そこにはすでに駒が置かれています。");
           continue;
         }
-        if (this.checkPosition(row, column) == false) {
+        if (this.setPiece(row, column) == false) {
           break;
         }
       }
